@@ -1,85 +1,84 @@
-// Declare global variables we need
+// Track any global variables we need
+let heads = 0
+let tails = 0
 
-var flipheads = 0
-var fliptails = 0
-
-//Add event listener for flip and clear buttons
-
-// Flip Button   
+document.addEventListener('DOMContentLoaded', function () {
+    // Add event listeners for both buttons
+//flip button    
+    document.getElementById('flip').addEventListener('click', () => {
         
-        
-    document.addEventListener('DOMContentLoaded', function () {
-       document.getElementById("flip").addEventListener("click", () => {
-       // Determine flip outcome & update image
-        var flippedHeads = Math.random() < 0.5
+        let flippedHeads = Math.random() > 0.5
 
-    if (flippedHeads) {
-           
-            document.getElementById("penny-image").src = "assets/images/penny-heads.jpg"
-            document.getElementById("message").textContent = "You Flipped Heads!"
+        if (flippedHeads) {
+            document.getElementById('penny-image').src = 'assets/images/penny-heads.jpg'
+
+
+            document.getElementById('message').textContent = 'You Got Heads!'
+
+            heads += 1
+        }
+        else {
             
-            flipheads += 1
-        }
-    else {
-         
-            document.getElementById("penny-image").src = "assets/images/penny-tails.jpg"
-            document.getElementById('message').textContent = 'You Flipped Tails!'
+            document.getElementById('penny-image').src = 'assets/images/penny-tails.jpg'
 
-         
-            fliptails += 1
-        }
-// Update the scorboard
-        var total = flipheads + fliptails
 
- // Make variables to track the percentages of heads and tails      
-        var percentHeads = 0
-        var percentTails = 0
+            document.getElementById('message').textContent = 'You Got Tails!'
+
+            
+            tails += 1
+        }
+
+        
+
+        // total number of rolls
+        let total = heads + tails
+
+        //  track percent heads and tails
+        let HeadPercent = 0
+        let TailPercent = 0
 
       
-    if (total > 0) {
-           
-            percentHeads = Math.round((flipheads / total) * 100)
-            percentTails = Math.round((fliptails / total) * 100)
+        if (total > 0) {
+           // Calculate percentage of heads and tails
+            HeadPercent = Math.round((heads / total) * 100)
+            TailPercent = Math.round((tails / total) * 100)
         }
 
-      // TODO: Update the display of each table cell
-        document.getElementById("heads").textContent = flipheads
-        document.getElementById("heads-percent").textContent = percentHeads + '%'
-        document.getElementById("tails").textContent = fliptails
-        document.getElementById("tails-percent").textContent = percentTails + '%'
+        // Update the values in the scoreboard table
+        document.getElementById('heads').textContent = heads
+        document.getElementById('heads-percent').textContent = HeadPercent + '%'
+        document.getElementById('tails').textContent = tails
+        document.getElementById('tails-percent').textContent = TailPercent + '%'
     })
+//clear button
+    document.getElementById('clear').addEventListener('click', function () {
+        // Reset the heads and tails values to zero
+        heads = 0
+        tails = 0
 
-// Clear Button Click Handler
-          
-    document.getElementById("clear").addEventListener("click", function () {
-       //Reset global variables to 0
-        flipheads = 0
-        fliptails = 0
+        // Update the message to the user
+        document.getElementById('message').textContent = 'Lets Get Flipping!'
 
-   
-        document.getElementById("message").textContent = "Lets Get Fliping!"
+        // scoreboard
+        
+        // Calculate total number of 
+        let total = heads + tails
 
-        var total = flipheads + fliptails
+        // Create variables to track percent heads and tails
+        let HeadPercent = 0
+        let TailPercent = 0
 
-  
-        var percentHeads = 0
-        var percentTails = 0
-
-     
-    if (total > 0) {
-       
-            percentHeads = Math.round((flipheads / total) * 100)
-            percentTails = Math.round((fliptails / total) * 100)
+        // Before trying to divide, make sure total is not zero
+        if (total > 0) {
+            // Calculate percentage of heads and tails
+            HeadPercent = Math.round((heads / total) * 100)
+            TailPercent = Math.round((tails / total) * 100)
         }
 
-      // Update the scoreboard 
-        document.getElementById("heads").textContent = flipheads
-        document.getElementById("heads-percent").textContent = percentHeads + '%'
-        document.getElementById("tails").textContent = fliptails
-        document.getElementById("tails-percent").textContent = percentTails + '%'
+        // Update the values in the scoreboard table
+        document.getElementById('heads').textContent = heads
+        document.getElementById('heads-percent').textContent = HeadPercent + '%'
+        document.getElementById('tails').textContent = tails
+        document.getElementById('tails-percent').textContent = TailPercent + '%'
     })
 })
-
-  
-
-   
