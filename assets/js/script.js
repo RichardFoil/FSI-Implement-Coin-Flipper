@@ -1,27 +1,85 @@
-// TODO: Declare any global variables we need
+// Declare global variables we need
 
+var flipheads = 0
+var fliptails = 0
 
-document.addEventListener('DOMContentLoaded', function () {
-    // This is just a sanity check to make sure your JavaScript script is getting loaded
-    // You can remove it once you see it in your browser console in the developer tools
-    console.log('Hi')
+//Add event listener for flip and clear buttons
 
-    // TODO: Add event listener and handler for flip and clear buttons
+// Flip Button   
+        
+        
+    document.addEventListener('DOMContentLoaded', function () {
+       document.getElementById("flip").addEventListener("click", () => {
+       // Determine flip outcome & update image
+        var flippedHeads = Math.random() < 0.5
 
-    // Flip Button Click Handler
-        // TODO: Determine flip outcome
-        // TODO: Update image and status message in the DOM
+    if (flippedHeads) {
+           
+            document.getElementById("penny-image").src = "assets/images/penny-heads.jpg"
+            document.getElementById("message").textContent = "You Flipped Heads!"
+            
+            flipheads += 1
+        }
+    else {
+         
+            document.getElementById("penny-image").src = "assets/images/penny-tails.jpg"
+            document.getElementById('message').textContent = 'You Flipped Tails!'
 
-        // Update the scorboard
-        // TODO: Calculate the total number of rolls/flips
-        // Make variables to track the percentages of heads and tails
-        // TODO: Use the calculated total to calculate the percentages
-        // HINT: Make sure not to divide by 0! (if total is 0, percent will be 0 as well)
-        // TODO: Update the display of each table cell
+         
+            fliptails += 1
+        }
+// Update the scorboard
+        var total = flipheads + fliptails
 
+ // Make variables to track the percentages of heads and tails      
+        var percentHeads = 0
+        var percentTails = 0
 
-    // Clear Button Click Handler
-        // TODO: Reset global variables to 0
-        // TODO: Update the scoreboard (same logic as in flip button click handler)
+      
+    if (total > 0) {
+           
+            percentHeads = Math.round((flipheads / total) * 100)
+            percentTails = Math.round((fliptails / total) * 100)
+        }
 
+      // TODO: Update the display of each table cell
+        document.getElementById("heads").textContent = flipheads
+        document.getElementById("heads-percent").textContent = percentHeads + '%'
+        document.getElementById("tails").textContent = fliptails
+        document.getElementById("tails-percent").textContent = percentTails + '%'
+    })
+
+// Clear Button Click Handler
+          
+    document.getElementById("clear").addEventListener("click", function () {
+       //Reset global variables to 0
+        flipheads = 0
+        fliptails = 0
+
+   
+        document.getElementById("message").textContent = "Lets Get Fliping!"
+
+        var total = flipheads + fliptails
+
+  
+        var percentHeads = 0
+        var percentTails = 0
+
+     
+    if (total > 0) {
+       
+            percentHeads = Math.round((flipheads / total) * 100)
+            percentTails = Math.round((fliptails / total) * 100)
+        }
+
+      // Update the scoreboard 
+        document.getElementById("heads").textContent = flipheads
+        document.getElementById("heads-percent").textContent = percentHeads + '%'
+        document.getElementById("tails").textContent = fliptails
+        document.getElementById("tails-percent").textContent = percentTails + '%'
+    })
 })
+
+  
+
+   
